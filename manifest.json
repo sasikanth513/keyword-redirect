@@ -9,6 +9,7 @@
   "permissions": ["storage", "tabs"],
   "omnibox": { "keyword": "go" },
   "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "browser_action": {
     "default_icon": {
       "16": "assets/extension-icons/icon16.png",

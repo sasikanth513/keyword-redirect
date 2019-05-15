@@ -8,10 +8,17 @@
     <link rel="stylesheet" href="../../stylesheets/override.css">
     <link rel="stylesheet" href="../../stylesheets/app.css">
     <script type="module" src="../constant.js"></script>
+
+    <!-- Vue -->
     <script type="module" src="./options.js"></script>
+
+    <script src="./vue/vue.min.js"></script>
   </head>
   <body>
-    <section class="section">
+    <div id="app2">
+      {{ message }}
+    </div>
+    <!-- <section class="section">
       <div class="container">
         <div class="columns">
           <div class="column">
@@ -87,7 +94,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
   </body>
 
   <div class="modal" id="modal-create-group">

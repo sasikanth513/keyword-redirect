@@ -139,11 +139,16 @@ const initDeleteShortcutEvent = () => {
 };
 
 function onInit() {
-  // seed data
-  renderUI();
-  initCreateShortcutForm();
-  initCreateGroupForm();
-  initDeleteShortcutEvent();
+  var app = new Vue({
+    el: "#app2",
+    data: {
+      message: "Hello Vue!"
+    }
+  });
+  // renderUI();
+  // initCreateShortcutForm();
+  // initCreateGroupForm();
+  // initDeleteShortcutEvent();
 }
 
 document.addEventListener("DOMContentLoaded", onInit, false);
