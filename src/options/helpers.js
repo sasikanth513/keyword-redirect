@@ -1,58 +1,64 @@
 const getGroupName = (groups, groupId) => {
   const group = groups.find(obj => obj.id === groupId);
-  return group ? group.name : 'Default';
+  return group ? group.name : "Default";
 };
 
 export const renderUI = () => {
-  chrome.storage.local.get(['shortcuts', 'groups'], function(result) {
+  chrome.storage.sync.get(["shortcuts", "groups"], function(result) {
     // console.log(result);
     const shortcuts = result.shortcuts || [];
     const groups = result.groups || [];
     // create group form
-    const groupEl = document.getElementById('groupList');
-    let groupStr = groups.map((group) =>
+    const groupEl = document.getElementById("groupList");
+    let groupStr = groups.map(
+      group =>
         `
         <option value=${group.id}>
-          ${group.name} ${group.prefix ? `(${group.prefix})` : ''}
+          ${group.name} ${group.prefix ? `(${group.prefix})` : ""}
         </option>
-      `);
-    const groupHTML = groupStr.join(' ');
+      `
+    );
+    const groupHTML = groupStr.join(" ");
     groupEl.innerHTML = groupHTML;
 
     // table
-    const el = document.getElementById('keywords-info');
-    let strs = shortcuts.map((shortcut) =>
+    const el = document.getElementById("keywords-info");
+    let strs = shortcuts.map(
+      shortcut =>
         `
         <tr>
           <td>${getGroupName(groups, shortcut.group)}</td>
           <td>${shortcut.keyword}</td>
           <td>${shortcut.url}</td>
           <td>
-            <img src="../../assets/icons/trash-alt-regular.svg" width="15" class="c-p" id="deleteShortcut" data-keyword="${shortcut.keyword}">
+            <img src="../../assets/icons/trash-alt-regular.svg" width="15" class="c-p" id="deleteShortcut" data-keyword="${
+              shortcut.keyword
+            }">
           </td>
         </tr>
-      `);
-    const html = strs.join(' ');
+      `
+    );
+    const html = strs.join(" ");
     el.innerHTML = html;
   });
-}
+};
 
-export const setDefaultValues = (cb) => {
-  chrome.storage.local.get(['seedData'], function(result) {
+export const setDefaultValues = cb => {
+  chrome.storage.sync.get(["seedData"], function(result) {
     if (!result.seedData) {
       // adding default shortcuts
-      chrome.storage.local.set({shortcuts: defaultShortcuts}, function() {
+      chrome.storage.sync.set({ shortcuts: defaultShortcuts }, function() {
         cb();
       });
 
-      chrome.storage.local.set({groups: defaultGroups}, function() {});
+      chrome.storage.sync.set({ groups: defaultGroups }, function() {});
 
-      chrome.storage.local.set({seedData: true}, function() {});
+      chrome.storage.sync.set({ seedData: true }, function() {});
     } else {
       cb();
     }
   });
-}
+};
 
 export const guid = () => {
   function s4() {
@@ -60,13 +66,26 @@ export const guid = () => {
       .toString(16)
       .substring(1);
   }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-}
+  return (
+    s4() +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    "-" +
+    s4() +
+    s4() +
+    s4()
+  );
+};
 
-export const isValidURL = (string) => {
-  var res = string.match(/(http(s)?:\/\/.)(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
-  if (res == null)
-    return false;
-  else
-    return true;
+export const isValidURL = string => {
+  var res = string.match(
+    /(http(s)?:\/\/.)(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+  );
+  if (res == null) return false;
+  else return true;
 };

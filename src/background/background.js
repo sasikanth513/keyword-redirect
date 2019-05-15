@@ -2,7 +2,7 @@
 chrome.omnibox.onInputEntered.addListener(
   function(text) {
     if (text && text.trim()) {
-      chrome.storage.local.get(['shortcuts'], function(result) {
+      chrome.storage.sync.get(['shortcuts'], function(result) {
         const shortcuts = result.shortcuts || [];
         console.log(shortcuts, text);
         const shortcut = shortcuts.find(obj => obj.keyword === text.trim())
