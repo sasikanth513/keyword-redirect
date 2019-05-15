@@ -10,11 +10,10 @@
 - Add shortcuts to all the slack groups you are part of
 - Add shortcut to project documentation you're working on
 
- ...etc
+...etc
 
 ### Source code
 
-Developed using basic html, css and js. Should be very easy to understand.
-
+Developed using vue.js with single component, should be easy to understand.
 
 **Any feedback / contributions are welcome**
