@@ -1,9 +1,11 @@
 /*general*/
 .c-p {
   cursor: pointer;
-  
 }
 
+.brand-color {
+  color: #00d1b2;
+}
 /*Text*/
 .text-muted {
   color: #999;

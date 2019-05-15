@@ -15,125 +15,140 @@
     <script src="./vue/vue.min.js"></script>
   </head>
   <body>
-    <div id="app2">
-      {{ message }}
-    </div>
-    <!-- <section class="section">
-      <div class="container">
-        <div class="columns">
-          <div class="column">
-            <button class="button is-primary is-pulled-right modal-button" data-target="modal-create-group">Create Group</button>
+    <div id="app">
+      <section class="section">
+        <div class="container">
+          <div class="columns">
+            <div class="column">
+              <h1 class="title has-text-centered ">Keyword Redirect</h1>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <header class="card-header">
-            <p class="card-header-title">
-              Add Shortcuts
-            </p>
-          </header>
-          <div class="card-content">
-            <div class="add-new-keyword">
-              <form class="field is-horizontal" id="createShortcutForm">
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <div class="select fw">
-                        <select id="groupList" class="fw">
-                          <option value="default">Default</option>
-                        </select>
+          <div class="columns">
+            <div class="column">
+              <button class="button is-primary is-pulled-right" v-on:click="openCreateGroupModal">Create Group</button>
+            </div>
+          </div>
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                Add Shortcuts
+              </p>
+            </header>
+            <div class="card-content">
+              <div class="add-new-keyword">
+                <form class="field is-horizontal" id="createShortcutForm" v-on:submit="createShortcut">
+                  <div class="field-body">
+                    <div class="field">
+                      <div class="control">
+                        <div class="select fw">
+                          <select id="groupList" class="fw">
+                            <option v-for="group in groups" v-bind:value="group.id">
+                              {{group.name}}
+                            </option>
+                          </select>
+                        </div>
                       </div>
                     </div>
+                    <div class="field">
+                      <p class="control">
+                        <input class="input" type="text" placeholder="Shortcut (e.g. 'yt')" id="keyword">
+                      </p>
+                    </div>
+                    <div class="field is-grouped">
+                      <p class="control is-expanded">
+                        <input class="input" type="text" placeholder="URL (e.g. 'youtube.com')" id="url">
+                      </p>
+                      <p class="control">
+                        <button class="button is-primary" id="addShortcut" type="submit">
+                          Add
+                        </button>
+                      </p>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="card mt-5">
+            <header class="card-header">
+              <p class="card-header-title">
+                Existing Shortcuts
+              </p>
+            </header>
+            <div class="card-content">
+              <table class="table is-striped is-hoverable is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>Group</th>
+                    <th>keyword</th>
+                    <th>URL</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="keywords-info">
+                  <tr v-for="st in reverseShortcuts">
+                    <td>{{getGroupName(st)}}</td>
+                    <td>{{st.keyword}}</td>
+                    <td>{{st.url}}</td>
+                    <td>
+                      <img src="../../assets/icons/trash-alt-regular.svg" width="15" class="c-p" v-on:click="deleteShortcut" v-bind:data-keyword="st.keyword">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="columns">
+            <div class="column mt-3 has-text-centered">
+              <strong>Developed by <a target="_blank" href="https://sasi.io/">Sasikanth Dronavalli</a>. Code is opensourced on <a target="_blank" href="https://github.com/sasikanth513">Github</a>. Buy me <a href="https://www.paypal.me/KDronavalli/5usd" target="_blank">Coffee.</a></strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="modal" id="modal-create-group">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Add Group</p>
+              <!-- <button class="delete" aria-label="close"></button> -->
+            </header>
+            <section class="modal-card-body">
+              <form class="field is-horizontal" id="createGroupForm">
+                <div class="field-body">
+                  <div class="field">
+                    <p class="control">
+                      <input class="input" type="text" placeholder="Name (required)" id="groupName">
+                    </p>
                   </div>
                   <div class="field">
                     <p class="control">
-                      <input class="input" type="text" placeholder="Shortcut (e.g. 'yt')" id="keyword">
-                    </p>
-                  </div>
-                  <div class="field is-grouped">
-                    <p class="control is-expanded">
-                      <input class="input" type="text" placeholder="URL (e.g. 'youtube.com')" id="url">
-                    </p>
-                    <p class="control">
-                      <button class="button is-primary" id="addShortcut" type="submit">
-                        Add
-                      </button>
+                      <input class="input" type="text" placeholder="Prefix (optional)" id="prefix">
                     </p>
                   </div>
                 </div>
               </form>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="card mt-5">
-          <header class="card-header">
-            <p class="card-header-title">
-              Existing Shortcuts
-            </p>
-          </header>
-          <div class="card-content">
-            <table class="table is-striped is-hoverable is-fullwidth">
-              <thead>
-                <tr>
-                  <th>Group</th>
-                  <th>keyword</th>
-                  <th>URL</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="keywords-info">
-              </tbody>
-            </table>
+              <div class="field-body">
+                <small class="text-muted">
+                  <strong>Prefix:</strong> A prefix for all shortcuts in this group. For e.g., if you have lots of youtube playlists you want to create shortcuts for, instead of adding shortcuts like 'yp1', 'yp2' and 'yp3' with "Default" group. You can create group and add prefix as 'yp' so all the shortcuts created under the group(e.g., 1, 2 and 3) will become 'yp1', 'yp2' and 'yp3'.
+                </small>
+              </div><br>
+              <div class="field-body">
+                <small class="text-muted">
+                  <strong>Name:</strong> Name of the group.
+                </small>
+              </div>
+            </section>
+            <footer class="modal-card-foot">
+              <button class="button is-success" v-on:click="createGroup">Create</button>
+              <button class="button modal-hide" v-on:click="hideCreateGroup">Cancel</button>
+            </footer>
           </div>
         </div>
-
-        <div class="columns">
-          <div class="column mt-3 has-text-centered">
-            <strong>Developed by <a target="_blank" href="https://sasi.io/">Sasikanth Dronavalli</a>. Code is opensourced on <a target="_blank" href="https://github.com/sasikanth513">Github</a>. Buy me <a href="https://www.paypal.me/KDronavalli/5usd" target="_blank">Coffee.</a></strong>
-          </div>
-        </div>
-      </div>
-    </section> -->
+    </div>
   </body>
 
-  <div class="modal" id="modal-create-group">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Add Group</p>
-        <!-- <button class="delete" aria-label="close"></button> -->
-      </header>
-      <section class="modal-card-body">
-        <form class="field is-horizontal" id="createGroupForm">
-          <div class="field-body">
-            <div class="field">
-              <p class="control">
-                <input class="input" type="text" placeholder="Prefix (optional)" id="prefix">
-              </p>
-            </div>
-            <div class="field">
-              <p class="control">
-                <input class="input" type="text" placeholder="Name (required)" id="groupName">
-              </p>
-            </div>
-          </div>
-        </form>
-        <div class="field-body">
-          <small class="text-muted">
-            <strong>Prefix:</strong> A prefix for all shortcuts in this group. For e.g., if you have lots of youtube playlists you want to create shortcuts for, instead of adding shortcuts like 'yp1', 'yp2', 'yp3', etc. You can add prefix to this group as 'yp' and you can create shortcuts with keywords '1', '2', '3', etc. which is same as adding 'yp1', 'yp2', 'yp3', etc.
-          </small>
-        </div><br>
-        <div class="field-body">
-          <small class="text-muted">
-            <strong>Name:</strong> Name of the group.
-          </small>
-        </div>
-      </section>
-      <footer class="modal-card-foot">
-        <button class="button is-success" id="submitCreateGroupForm">Create</button>
-        <button class="button modal-hide" data-target="modal-create-group">Cancel</button>
-      </footer>
-    </div>
-  </div>
 </html>

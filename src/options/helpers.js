@@ -45,23 +45,6 @@ export const renderUI = () => {
   });
 };
 
-export const setDefaultValues = cb => {
-  chrome.storage.sync.get(["seedData"], function(result) {
-    if (!result.seedData) {
-      // adding default shortcuts
-      chrome.storage.sync.set({ shortcuts: defaultShortcuts }, function() {
-        cb();
-      });
-
-      chrome.storage.sync.set({ groups: defaultGroups }, function() {});
-
-      chrome.storage.sync.set({ seedData: true }, function() {});
-    } else {
-      cb();
-    }
-  });
-};
-
 export const guid = () => {
   function s4() {
     return Math.floor((1 + Math.random()) * 0x10000)
