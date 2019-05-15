@@ -1,4 +1,4 @@
-import { setDefaultValues, renderUI, guid, isValidURL } from "./helpers.js";
+import { renderUI, guid, isValidURL } from "./helpers.js";
 
 const deleteShortcutWithKeyword = keyword => {
   chrome.storage.sync.get(["shortcuts"], function(result) {
@@ -140,12 +140,10 @@ const initDeleteShortcutEvent = () => {
 
 function onInit() {
   // seed data
-  setDefaultValues(function() {
-    renderUI();
-    initCreateShortcutForm();
-    initCreateGroupForm();
-    initDeleteShortcutEvent();
-  });
+  renderUI();
+  initCreateShortcutForm();
+  initCreateGroupForm();
+  initDeleteShortcutEvent();
 }
 
 document.addEventListener("DOMContentLoaded", onInit, false);

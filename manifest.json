@@ -4,14 +4,10 @@
   "version": "0.2",
   "options_page": "src/options/options.html",
   "background": {
-    "scripts": ["src/background/background.js"],
-    "persistent": false
+    "page": "src/background/background.html"
   },
-  "permissions": [
-    "storage",
-    "tabs"
-  ],
-  "omnibox": { "keyword" : "go" },
+  "permissions": ["storage", "tabs"],
+  "omnibox": { "keyword": "go" },
   "manifest_version": 2,
   "browser_action": {
     "default_icon": {

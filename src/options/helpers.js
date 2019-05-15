@@ -1,3 +1,5 @@
+import { defaultShortcuts, defaultGroups } from "../constant.js";
+
 const getGroupName = (groups, groupId) => {
   const group = groups.find(obj => obj.id === groupId);
   return group ? group.name : "Default";

@@ -1,4 +1,4 @@
-defaultGroups = [
+export const defaultGroups = [
   {
     name: "Default",
     id: "default",
@@ -6,7 +6,7 @@ defaultGroups = [
   }
 ];
 
-defaultShortcuts = [
+export const defaultShortcuts = [
   {
     keyword: "yt",
     url: "https://youtube.com",
@@ -38,7 +38,3 @@ defaultShortcuts = [
     group: "default"
   }
 ];
-
-resetGroupNames = () => {
-  chrome.storage.sync.set({ groups: defaultGroups }, function() {});
-};
