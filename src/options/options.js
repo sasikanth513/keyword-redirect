@@ -1,15 +1,7 @@
-import { renderUI, guid, isValidURL } from "./helpers.js";
-
-const appendPrefixToKeyword = (groups, groupId, keyword) => {
-  const group = groups.find(obj => obj.id === groupId);
-  if (group && group.prefix) {
-    return `${group.prefix}${keyword}`;
-  }
-  return keyword;
-};
+import { appendPrefixToKeyword, guid, isValidURL } from "./helpers.js";
 
 function onInit() {
-  var app = new Vue({
+  new Vue({
     el: "#app",
     data: {
       message: "Hello Vue!",
