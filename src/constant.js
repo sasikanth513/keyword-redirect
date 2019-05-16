@@ -8,33 +8,14 @@ export const defaultGroups = [
 
 export const defaultShortcuts = [
   {
-    keyword: "yt",
-    url: "https://youtube.com",
+    keyword: "app",
+    url:
+      "https://chrome.google.com/webstore/detail/keyword-redirect/okmndadncjgigahlgcbgenaoecagebhh/",
     group: "default"
   },
   {
-    keyword: "tw",
-    url: "https://twitter.com",
-    group: "default"
-  },
-  {
-    keyword: "re",
-    url: "https://reddit.com",
-    group: "default"
-  },
-  {
-    keyword: "gm",
-    url: "https://gmail.com",
-    group: "default"
-  },
-  {
-    keyword: "fb",
-    url: "https://facebook.com",
-    group: "default"
-  },
-  {
-    keyword: "ig",
-    url: "https://instagram.com",
+    keyword: "dev",
+    url: "https://twitter.com/sasi513",
     group: "default"
   }
 ];

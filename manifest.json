@@ -1,7 +1,7 @@
 {
   "name": "Keyword Redirect",
   "description": "Shortcuts to your long url's. Type 'go' and a keyword into the address bar to open url.",
-  "version": "0.2",
+  "version": "0.3",
   "options_page": "src/options/options.html",
   "background": {
     "page": "src/background/background.html"
