@@ -16,7 +16,7 @@ function onInit() {
     },
     computed: {
       reverseShortcuts() {
-        return this.shortcuts.reverse();
+        return this.shortcuts;
       }
     },
     methods: {
