@@ -1,4 +1,4 @@
-import { defaultShortcuts, defaultGroups } from "../constant.js";
+import { defaultShortcuts, defaultGroups, encodeHTML } from "../constant.js";
 
 // suggest results from the existing shortcuts
 chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
@@ -6,7 +6,6 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
     const shortcuts = result.shortcuts || [];
     const regex = new RegExp(text, "i");
     let matches = shortcuts.filter(obj => regex.test(obj.keyword));
-    // console.log({ text, matches });
     if (matches && matches.length > 0) {
       matches = matches.slice(0, 5);
 
@@ -15,10 +14,9 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
       matches.forEach(function(res) {
         out.push({
           content: res.keyword,
-          description: `${res.keyword} - ${res.url}`
+          description: `${res.keyword} - ${encodeHTML(res.url)}`
         });
       });
-      // console.log({ out });
       suggest(out);
     } else {
       suggest([]);

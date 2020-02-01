@@ -15,20 +15,3 @@
 ### Source code
 
 Developed using vue.js with single component, should be easy to understand.
-
-**Any feedback / contributions are welcome**
-
-https://github.com/sdras
-https://github.com/kentcdodds
-https://github.com/wesbos
-https://github.com/meteor/meteor
-https://github.com/sindresorhus
-
-https://www.youtube.com/watch?v=XLJN4JfniH4&list=PLu8EoSxDXHP5H-e74dRVbl2Tj76RagB74 - wes javascript
-
-https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-
-https://css-tricks.com/snippets/css/complete-guide-grid/
-
-https://www.reddit.com/r/books/
-https://www.reddit.com/r/todayilearned/
