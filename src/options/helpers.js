@@ -34,8 +34,9 @@ export const guid = () => {
 };
 
 export const isValidURL = string => {
+  // Allows anything to be between http(s):// and the first slash
   var res = string.match(
-    /(http(s)?:\/\/.)(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+      /^(http(s)?)?:\/\/([^\/\s]+)(\/.*)?$/g
   );
   if (res == null) return false;
   else return true;
